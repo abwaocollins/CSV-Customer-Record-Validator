@@ -1,0 +1,56 @@
+
+    <div class="container customer-upload">
+    <h1 class="section_title text-center">Customer CSV Upload</h1>
+    <%= if @loading do %>
+      <div class="row">
+        <div id="cover">
+          <p id="message"><%= @loading_message %></p>
+        </div>
+      </div>
+      <% end %>
+    <div class="img-container"><img src={Routes.static_path( @socket, "/images/upload.png")} alt="upload file"/>
+    <%= if @complete do %>
+      <div class="overlay">
+      
+        <div class="">
+        <%= for entry <- @uploaded_files do %>
+          <a href={entry} download="Response" class="download-btn">
+            <button type="button">Download Json</button>
+          </a>
+        <% end %>
+        </div>
+        
+      </div> 
+      <% end %> 
+    </div>
+      
+      <div class="row">
+        <div class="column">
+        <div class="container" >
+          <.form let={_form} for={:upload} phx-submit="upload" phx-change="validate" >
+            <%= for error <- @uploads.csv.errors do %>
+            <p>Errors: <%= error %></p>
+            <% end %>
+          <div class="form-items">
+          <div class="form-item">
+           <span class="text-gray">CSV is the only supported format</span>
+          <%= live_file_input @uploads.csv, class: "custom-file-input" %>
+          </div>
+          
+          <div class="form-item">
+          <span class="text-gray"><a  href={Routes.static_path( @socket, "/uploads/Sample.csv")} download> Download Sample CSV </a></span>
+          <%= for entry <- @uploads.csv.entries do %>
+              <span class="text-gray">
+              <%= entry.client_name %> - <%= entry.progress %>%
+              </span>
+
+          <% end %>
+          <%= submit "upload file" %>
+          </div>
+          </div>
+          </.form>
+          </div>
+        </div>
+      </div> 
+        
+    </div>
