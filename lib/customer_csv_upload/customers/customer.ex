@@ -18,9 +18,22 @@ defmodule CustomerCsvUpload.Customers.Customer do
     {customer, @types}
     |> cast(attrs, Map.keys(@types))
     |> validate_required([:name, :dob, :phone, :countryID, :siteCode])
-    |> validate_inclusion(:countryID, 1..3)
+    |> validate_name_is_non_empty_string()
+    |> validate_inclusion(:countryID, 1..3,
+      message: "is invalid, it should be an integer of 1: Kenya, 2: Sierra Leone, 3: Nigeria"
+    )
     |> validate_phone_format()
     |> validate_country_site()
+  end
+
+  defp validate_name_is_non_empty_string(changeset) do
+    name = get_field(changeset, :name)
+
+    if is_binary(name) && String.trim(name) == "" do
+      changeset |> add_error(:name, " must not be an empty string")
+    else
+      changeset
+    end
   end
 
   defp validate_phone_format(changeset) do
@@ -49,7 +62,7 @@ defmodule CustomerCsvUpload.Customers.Customer do
         1 -> "Kenya"
         2 -> "Sierra Leone"
         3 -> "Nigeria"
-        _ -> ""
+        _ -> "Kenya, Sierra Leone and Nigeria"
       end
 
     if site_code in valid_site_codes do

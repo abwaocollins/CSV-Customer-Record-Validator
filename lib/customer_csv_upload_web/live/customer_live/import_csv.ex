@@ -18,23 +18,11 @@ defmodule CustomerCsvUploadWeb.CustomerLive.ImportCsv do
 
   @impl Phoenix.LiveView
   def handle_event("upload", _params, socket) do
-    send(self(), :parse_csv)
-
-    {:noreply,
-     socket
-     |> assign(loading: true)
-     |> assign(loading_message: "Processing in progress...")}
-  end
-
-  @impl Phoenix.LiveView
-  def handle_event("validate", _params, socket) do
-    {:noreply, socket}
-  end
-
-  @impl Phoenix.LiveView
-  def handle_info(:parse_csv, socket) do
     [csv_validated_data | _tail] =
       consume_uploaded_entries(socket, :csv, fn %{path: path_to_file}, _entry ->
+        dest = Path.join("priv/static/uploads", Path.basename(path_to_file))
+        File.cp!(path_to_file, dest)
+        Routes.static_path(socket, "/csvs/#{Path.basename(dest)}")
         filtered_data = Customers.upload_data(path_to_file)
         {:ok, filtered_data}
       end)
@@ -47,8 +35,15 @@ defmodule CustomerCsvUploadWeb.CustomerLive.ImportCsv do
 
     {:noreply,
      socket
+     |> assign(loading: true)
+     |> assign(loading_message: "Processing in progress...")
      |> assign(records: csv_validated_data)
      |> assign(loading_message: "Processing #{row_count} rows ...")}
+  end
+
+  @impl Phoenix.LiveView
+  def handle_event("validate", _params, socket) do
+    {:noreply, socket}
   end
 
   @impl Phoenix.LiveView
