@@ -20,7 +20,7 @@ defmodule CustomerCsvUploadWeb.CustomerLive.ImportCsv do
     [csv_validated_data | _tail] =
       consume_uploaded_entries(socket, :csv, fn %{path: path_to_file}, _entry ->
         copy_and_generate_static_path(path_to_file, socket)
-        filtered_data = Customers.upload_data(path_to_file)
+        filtered_data = Customers.upload_data(path_to_file) |> IO.inspect(label: "++++")
         {:ok, filtered_data}
       end)
 
@@ -75,6 +75,12 @@ defmodule CustomerCsvUploadWeb.CustomerLive.ImportCsv do
      |> assign(loading: false)
      |> assign(complete: true)}
   end
+
+  def error_to_string(:too_many_files), do: "You have selected too many files"
+  def error_to_string(:too_large), do: "FIle is too large"
+
+  def error_to_string(:not_accepted),
+    do: "You have selected an unacceptable file type, required: csv file"
 
   defp copy_and_generate_static_path(path_to_file, socket) do
     file_name = Path.basename(path_to_file)

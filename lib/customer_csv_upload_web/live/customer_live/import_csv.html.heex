@@ -12,8 +12,14 @@
           <.form let={_form} for={:upload} phx-submit="upload" phx-change="validate" >
 
           <div class="container upload-container" phx-drop-target={@uploads.csv.ref}>
-                <div class="form-drag">
+              <div class="form-drag">
+                  
                 <%= for entry <- @uploads.csv.entries do %>
+                  <%= for error <- upload_errors(@uploads.csv, entry) do %>
+                      <span class="alert alert-danger">
+                      <%= error_to_string(error) %>
+                       </span>
+              <% end %>
               <span class="alert-info">
               <%= entry.client_name %> was choosen, upload progress - <%= entry.progress %>%
               </span>
@@ -23,9 +29,8 @@
                   <%= live_file_input @uploads.csv, class: "custom-file-input" %>
                 </div>
           </div>
-            <%= for error <- @uploads.csv.errors do %>
-            <p>Errors: <%= error %></p>
-            <% end %>
+           
+        
           <div class="form-items">
           
           

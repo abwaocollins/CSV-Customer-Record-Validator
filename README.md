@@ -70,6 +70,10 @@ The following is an example of the JSON response returned after processing the u
   }
 ]
 ```
+## Screenshots
+![right file format](/priv/static/correct.png)
+
+![right file format](/priv/static/wrong.png)
 
 ## Application Workflow and Structure
 

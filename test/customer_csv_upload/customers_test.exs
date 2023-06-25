@@ -69,7 +69,7 @@ defmodule CustomerCsvUpload.CustomersTest do
       siteCode: 235
     }
 
-    changeset = Customers.change_customer(%Customer{}, customer) |> IO.inspect()
+    changeset = Customers.change_customer(%Customer{}, customer)
     assert changeset.valid? == false
   end
 
@@ -82,7 +82,7 @@ defmodule CustomerCsvUpload.CustomersTest do
       siteCode: 235
     }
 
-    changeset = Customers.change_customer(%Customer{}, customer) |> IO.inspect()
+    changeset = Customers.change_customer(%Customer{}, customer)
     assert changeset.valid? == false
   end
 
@@ -95,7 +95,7 @@ defmodule CustomerCsvUpload.CustomersTest do
       siteCode: 235
     }
 
-    changeset = Customers.change_customer(%Customer{}, customer) |> IO.inspect()
+    changeset = Customers.change_customer(%Customer{}, customer)
     assert changeset.valid? == false
   end
 
@@ -108,7 +108,7 @@ defmodule CustomerCsvUpload.CustomersTest do
       siteCode: 235
     }
 
-    changeset = Customers.change_customer(%Customer{}, customer) |> IO.inspect()
+    changeset = Customers.change_customer(%Customer{}, customer)
     assert changeset.valid? == false
   end
 
@@ -121,7 +121,7 @@ defmodule CustomerCsvUpload.CustomersTest do
       siteCode: 811
     }
 
-    changeset = Customers.change_customer(%Customer{}, customer) |> IO.inspect()
+    changeset = Customers.change_customer(%Customer{}, customer)
     assert changeset.valid? == false
   end
 
