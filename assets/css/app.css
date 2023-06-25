@@ -23,6 +23,21 @@ body {
   text-align: center;
 }
 
+.upload-container {
+  height: 50vh;
+  width: 40vw;
+  display: flex;
+  justify-content: center;
+
+  border: dashed 3px #ced4da;
+}
+
+.form-drag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .map-container {
   color: #000;
   background: #c6c7c4;
@@ -41,19 +56,25 @@ body {
   justify-content: space-between;
 }
 
+.download-cont {
+  margin-right: -65px;
+}
+
 .custom-file-input {
   color: transparent;
+  margin-left: 100px;
 }
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
 .custom-file-input::before {
-  content: "Browse files";
-  color: #fff;
+  content: "choose file";
+  color: #000;
   display: inline-block;
-  background: #6c63ff;
+  background: #ffffffc2;
+  border: 2px solid #302e2e;
 
-  border-radius: 3px;
+  border-radius: 6px;
   padding: 12px 20px;
   outline: none;
   white-space: nowrap;
@@ -80,6 +101,13 @@ body {
   margin-bottom: 5px;
 }
 
+.text-info {
+  color: #494646;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
 .overlay {
   position: absolute;
   top: 0;
@@ -90,26 +118,10 @@ body {
   justify-content: center;
   align-items: center;
 }
-#cover {
-  position: absolute;
-  width: 100%;
 
-  z-index: 9999;
-}
-#message {
-  position: relative;
-  top: 20%;
-  font-weight: bold;
-  background-color: white;
-  padding: 1em;
-  border-radius: 3px;
-  text-align: center;
-  width: 60%;
-  margin: auto;
-}
-
-.download-btn {
-  background: #2f2e41;
+.download-button {
+  background-color: #31708f;
+  color: white;
 }
 
 /* Alerts and form errors used by phx.new */
