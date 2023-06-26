@@ -10,7 +10,7 @@ This application allows users to upload CSV files, validate the data, and genera
 
 ## Assumptions
 
-1. Telephone numbers are considered valid if they consist of 12 digits.
+1. Telephone numbers in the csv file are from Nigeria, Kenya and Sierra leone.
 2. If multiple errors occur on a single line, they are returned as a list of errors.
 3. The application returns JSON data after the validation process.
 
@@ -40,7 +40,33 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 The following is an example of the JSON response returned after processing the uploaded CSV file:
 
 ```json
-[{"CountryID":1,"DoB":"1963-08-15","Name":"Simon Kamau","NationalID":"13424422","Phone":"254705611231","SiteCode":235},{"error":["siteCode  657 does not exist in Sierra Leone"],"line":2},{"CountryID":1,"DoB":"1976-02-08","Name":"Barry Collins","NationalID":null,"Phone":"254757127350","SiteCode":235},{"error":["dob is invalid"],"line":4}]
+[
+    {
+        "CountryID": 1,
+        "DoB": "1963-08-15",
+        "Name": "Simon Kamau",
+        "NationalID": "13424422",
+        "Phone": "254705611231",
+        "SiteCode": 235
+    },
+    {
+        "error": ["siteCode 657 does not exist in Sierra Leone"],
+        "line": 2
+    },
+    {
+        "CountryID": 1,
+        "DoB": "1976-02-08",
+        "Name": "Barry Collins",
+        "NationalID": null,
+        "Phone": "254757127350",
+        "SiteCode": 235
+    },
+    {
+        "error": ["dob is invalid"],
+        "line": 4
+    }
+]
+
 ```
 ## Screenshots
 ![right file format](/priv/static/correct.png)
