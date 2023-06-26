@@ -29,7 +29,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 ## Uploading and Processing Files
 
 1. Open the application in your browser after starting the server.
-2. On the loaded page, you can drag and drop a CSV file or use the file input to choose a file for upload.
+2. On the loaded page, you can drag and drop a CSV file or use the file input to choose a file for upload. Download Sample.csv for testing.
 3. Click the "Upload" button to initiate the processing of the uploaded file.
 4. If the processing completes successfully without any errors, you will be able to download the JSON response.
    - The JSON response contains a list of records with their corresponding fields and any encountered errors.
@@ -40,35 +40,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 The following is an example of the JSON response returned after processing the uploaded CSV file:
 
 ```json
-[
-  {
-    "CountryID": 1,
-    "DoB": "1963-08-15",
-    "Name": "Simon Kamau",
-    "NationalID": "13424422",
-    "Phone": "254705611231",
-    "SiteCode": 235
-  },
-  {
-    "error": [
-      "siteCode 657 does not exist in Sierra Leone",
-      "phone number must be in the format 254759635432"
-    ],
-    "line": 2
-  },
-  {
-    "CountryID": 1,
-    "DoB": "1976-02-08",
-    "Name": "Barry Collins",
-    "NationalID": null,
-    "Phone": "254757127350",
-    "SiteCode": 235
-  },
-  {
-    "error": ["dob is invalid"],
-    "line": 4
-  }
-]
+[{"CountryID":1,"DoB":"1963-08-15","Name":"Simon Kamau","NationalID":"13424422","Phone":"254705611231","SiteCode":235},{"error":["siteCode  657 does not exist in Sierra Leone"],"line":2},{"CountryID":1,"DoB":"1976-02-08","Name":"Barry Collins","NationalID":null,"Phone":"254757127350","SiteCode":235},{"error":["dob is invalid"],"line":4}]
 ```
 ## Screenshots
 ![right file format](/priv/static/correct.png)
